@@ -4,7 +4,6 @@ require 'tempfile'
 require 'rack-thumb-proxy/version'
 require 'rack-thumb-proxy/configuration'
 require 'rack-thumb-proxy/view_helpers'
-
 require 'rack-thumb-proxy/railtie' if defined?(Rails)
 
 module Rack
@@ -200,7 +199,7 @@ module Rack
 
         # Examples: http://rubular.com/r/oPRK1t31yv
         def routing_pattern
-          /^\/(?<hash_signature>[a-z0-9]{10}|)\/?(?<options>(:?[0-9]*x+[0-9]*|))(?<gravity>c|n|ne|e|s|sw|w|nw|)\/?(?<escaped_url>https?.*)$/
+          /^#{Regexp.escape(@configuration.mount_point)}\/(?<hash_signature>[a-z0-9]{10}|)\/?(?<options>(:?[0-9]*x+[0-9]*|))(?<gravity>c|n|ne|e|s|sw|w|nw|)\/?(?<escaped_url>https?.*)$/
         end
 
         def response
