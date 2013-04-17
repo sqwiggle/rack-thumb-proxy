@@ -37,7 +37,7 @@ module Rack
         def initialize_defaults!
           @secret                = nil
           @key_length            = 10
-          @mount_point           = '/'
+          @mount_point           = '/media/'
           @option_labels         = {}
           @cache_control_headers = {'Cache-Control' => 'max-age=86400, public, must-revalidate'}
         end

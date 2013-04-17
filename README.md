@@ -138,30 +138,17 @@ application, you can simply use something like:
     match '/media', :to => Rack::Thumb::Proxy
 
 If you need to configure additional options, this can be done in an
-initializer, or by passing a configuaation hash to the
-Rack::Thumb::Proxy initialzer. The former is preferred.
+initializer, or by passing a configuration hash to the
+Rack::Thumb::Proxy initializer. The former is preferred.
 
 ## Example Configuration
 
     Rack::Thumb::Proxy.configure do
-      prefix     "/media/"
-      secret     "d94bba3d2e0b4809a570158506"
-      key_length 10
+      mount_point     "/media/"
+      key_length      10
+      secret          "d94bba3d2e0b4809a570158506"
     end
 
-When one doesn't want to use the configuration API, the more succinct
-version would be to do something like:
-
-    # ./config/routes.rb
-    match '/media' => Rack::Thumb::Proxy { prefix: "/",
-                            secret: "ABC1234", key_length: 10 }
-
-    # config.ru
-    use Rack::Thumb::Proxy { prefix: "/", secret: "ABC1234", key_length: 10 }
-
-One complication is that when using the link generator functions, one
-**must** use the configuration API, otherwise the default path will be
-`/`.
 
 ## To Do
 

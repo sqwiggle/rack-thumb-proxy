@@ -39,13 +39,19 @@ module Rack
 
       def call
         if request_matches?
-          validate_signature! &&
-          retreive_upstream!  &&
-          transform_image!    &&
-          format_response!
-          response.finish
+          if validate_signature!
+            if retreive_upstream!  &&
+               transform_image!    &&
+               format_response!
+               response.finish
+             else
+               [404, {'Content-Length' => 9.to_s, 'Content-Type' => 'text/plain'}, ['Not Found']]
+             end
+          else
+            [400, {'Content-Length' => 17.to_s, 'Content-Type' => 'text/plain'}, ['Invalid Signature']]
+          end
         else
-          [404, {'Content-Length' => 9.to_s, 'Content-Type' => 'text/plain'}, ['Not Found']]
+          [400, {'Content-Length' => 18.to_s, 'Content-Type' => 'text/plain'}, ['Bad Request Format']]
         end
       end
 
