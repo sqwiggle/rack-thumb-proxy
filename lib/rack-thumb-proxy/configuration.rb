@@ -10,6 +10,11 @@ module Rack
           initialize_defaults!
         end
 
+        def default(new_default = nil)
+          @default = new_default if new_default
+          return @default
+        end
+        
         def mount_point(new_mount_point = nil)
           @mount_point = new_mount_point if new_mount_point
           return @mount_point
