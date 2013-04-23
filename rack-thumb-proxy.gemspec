@@ -20,7 +20,6 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'rack'
   gem.add_dependency 'mapel'
   gem.add_dependency 'dimensions'
-  gem.add_dependency 'open-uri-redirections', :git => 'https://github.com/sqwiggle/open-uri-redirections.git'
 
   gem.add_development_dependency 'minitest', '~> 2.11'
   gem.add_development_dependency 'webmock', '~> 1.8.0'
