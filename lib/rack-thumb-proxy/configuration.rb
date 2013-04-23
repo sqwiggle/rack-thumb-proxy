@@ -1,7 +1,6 @@
 module Rack
   module Thumb
     class Proxy
-
       class Configuration
 
         attr_reader   :cache_control_headers
@@ -35,6 +34,7 @@ module Rack
         end
 
         def initialize_defaults!
+          @default               = '/assets/404.png'
           @secret                = nil
           @key_length            = 10
           @mount_point           = '/media/'
@@ -45,9 +45,6 @@ module Rack
         private :initialize_defaults!
 
       end
-
     end
-
   end
-
 end
