@@ -1,5 +1,6 @@
 require 'cgi'
 require 'open-uri'
+require 'open-uri-redirections'
 require 'tempfile'
 require 'rack-thumb-proxy/version'
 require 'rack-thumb-proxy/configuration'
@@ -61,7 +62,7 @@ module Rack
         end
 
         def retreive_upstream!
-          open(request_url, 'rb') do |f|
+          open(request_url, :allow_redirections => :all) do |f|
             tempfile.binmode
             tempfile.write(f.read)
             tempfile.flush
@@ -199,7 +200,6 @@ module Rack
 
         # Examples: http://rubular.com/r/oPRK1t31yv
         def routing_pattern
-          puts configuration.mount_point
           /^#{Regexp.escape(configuration.mount_point)}(?<hash_signature>[a-z0-9]{10}|)\/?(?<options>(:?[0-9]*x+[0-9]*|))(?<gravity>c|n|ne|e|s|sw|w|nw|)\/?(?<escaped_url>https?.*)$/
         end
 
